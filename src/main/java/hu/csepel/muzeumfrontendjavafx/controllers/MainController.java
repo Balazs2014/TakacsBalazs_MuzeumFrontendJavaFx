@@ -5,7 +5,9 @@ import hu.csepel.muzeumfrontendjavafx.Controller;
 import hu.csepel.muzeumfrontendjavafx.classes.Festmeny;
 import hu.csepel.muzeumfrontendjavafx.classes.Szobor;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -37,6 +39,10 @@ public class MainController extends Controller {
     private TableColumn<Szobor, String> szoborSzemelyCol;
     @FXML
     private TableColumn<Szobor, Integer> szoborMagassagCol;
+    @FXML
+    private Button btnFestmenyModositas;
+    @FXML
+    private Button btnFestmenyTorles;
 
     public void initialize() {
         festmenyIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -48,6 +54,8 @@ public class MainController extends Controller {
     }
 
     private void festmenyListaFeltoltes() {
+        btnFestmenyTorles.setDisable(true);
+        btnFestmenyModositas.setDisable(true);
         try {
             List<Festmeny> festmenyList = Api.getFestmenyek();
             tableViewFestmeny.getItems().clear();
@@ -63,7 +71,7 @@ public class MainController extends Controller {
     public void onFestmenyHozzaadasClick(ActionEvent actionEvent) {
         try {
             Controller hozzaadasAblak = ujAblak("festmeny-hozzaadas-view.fxml", "Festmény hozzáadása", 300, 240);
-            hozzaadasAblak.getStage().setOnCloseRequest(event -> festmenyListaFeltoltes());
+            hozzaadasAblak.getStage().setOnCloseRequest(event -> tableViewFestmeny.refresh());
             hozzaadasAblak.getStage().show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,10 +80,30 @@ public class MainController extends Controller {
 
     @FXML
     public void onFestmenyTorlesClick(ActionEvent actionEvent) {
+        Festmeny torlendo = tableViewFestmeny.getSelectionModel().getSelectedItem();
+        if (!confirm("Biztons törölni szeretné a(z) " + torlendo.getTitle() + " című festményt?")) {
+            return;
+        }
+        try {
+            boolean siker = Api.deleteFestmeny(torlendo.getId());
+            alert(siker ? "Sikeres törlés!" : "Sikertelen törlés!");
+            festmenyListaFeltoltes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void onFestmenyModositasClick(ActionEvent actionEvent) {
+        Festmeny selectedItem = tableViewFestmeny.getSelectionModel().getSelectedItem();
+        try {
+            FestmenyModositasController modositasAblak = (FestmenyModositasController) ujAblak("festmeny-modositas-view.fxml", "Festmény módosítása", 300, 240);
+            modositasAblak.setModositando(selectedItem);
+            modositasAblak.getStage().setOnHiding(event -> tableViewFestmeny.refresh());
+            modositasAblak.getStage().show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -88,5 +116,14 @@ public class MainController extends Controller {
 
     @FXML
     public void onSzoborTorlesClick(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void onItemSelected(Event event) {
+        int selectedIndex = tableViewFestmeny.getSelectionModel().getSelectedIndex();
+        if (selectedIndex != -1) {
+            btnFestmenyTorles.setDisable(false);
+            btnFestmenyModositas.setDisable(false);
+        }
     }
 }

@@ -20,10 +20,8 @@ public class Api {
             String msg = jsonConverter.fromJson(json, ApiError.class).getMessage();
             throw new IOException(msg);
         }
-
         Type type = new TypeToken<List<Festmeny>>() {
         }.getType();
-
         return jsonConverter.fromJson(json, type);
     }
 
@@ -36,7 +34,29 @@ public class Api {
             String msg = jsonConverter.fromJson(json, ApiError.class).getMessage();
             throw new IOException(msg);
         }
+        return jsonConverter.fromJson(json, Festmeny.class);
+    }
 
+    public static boolean deleteFestmeny(int id) throws IOException {
+        Response respone = RequestHandler.delete(FESTMENY_URL + "/" + id);
+        Gson jsonConverter = new Gson();
+        String json = respone.getContent();
+        if (respone.getResponseCode() > 400) {
+            String msg = jsonConverter.fromJson(json, ApiError.class).getMessage();
+            throw new IOException(msg);
+        }
+        return respone.getResponseCode() == 204;
+    }
+
+    public static Festmeny putFestmeny(Festmeny modositando) throws IOException {
+        Gson jsonConverter = new Gson();
+        String modositJson = jsonConverter.toJson(modositando);
+        Response response = RequestHandler.put(FESTMENY_URL + "/" + modositando.getId(), modositJson);
+        String json = response.getContent();
+        if (response.getResponseCode() > 400) {
+            String msg = jsonConverter.fromJson(json, ApiError.class).getMessage();
+            throw new IOException(msg);
+        }
         return jsonConverter.fromJson(json, Festmeny.class);
     }
 }

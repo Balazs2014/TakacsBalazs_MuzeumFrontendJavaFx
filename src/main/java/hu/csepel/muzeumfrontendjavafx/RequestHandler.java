@@ -11,7 +11,6 @@ public class RequestHandler {
 
     public static Response get(String url) throws IOException {
         HttpURLConnection conn = setConnection(url);
-
         return getResponse(conn);
     }
 
@@ -19,7 +18,19 @@ public class RequestHandler {
         HttpURLConnection conn = setConnection(url);
         conn.setRequestMethod("POST");
         setBody(conn, data);
+        return getResponse(conn);
+    }
 
+    public static Response delete(String url) throws IOException {
+        HttpURLConnection conn = setConnection(url);
+        conn.setRequestMethod("DELETE");
+        return getResponse(conn);
+    }
+
+    public static Response put(String url, String data) throws IOException {
+        HttpURLConnection conn = setConnection(url);
+        conn.setRequestMethod("PUT");
+        setBody(conn, data);
         return getResponse(conn);
     }
 
@@ -31,7 +42,6 @@ public class RequestHandler {
         } else {
             is = conn.getErrorStream();
         }
-
         StringBuilder builder = new StringBuilder();
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         String sor = reader.readLine();
@@ -41,7 +51,6 @@ public class RequestHandler {
         }
         reader.close();
         is.close();
-
         return new Response(responseCode, builder.toString());
     }
 
