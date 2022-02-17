@@ -1,6 +1,7 @@
 package hu.csepel.muzeumfrontendjavafx.controllers;
 
 import hu.csepel.muzeumfrontendjavafx.Api;
+import hu.csepel.muzeumfrontendjavafx.Controller;
 import hu.csepel.muzeumfrontendjavafx.classes.Festmeny;
 import hu.csepel.muzeumfrontendjavafx.classes.Szobor;
 import javafx.event.ActionEvent;
@@ -14,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainController {
+public class MainController extends Controller {
     @FXML
     private TableView<Festmeny> tableViewFestmeny;
     @FXML
@@ -60,6 +61,13 @@ public class MainController {
 
     @FXML
     public void onFestmenyHozzaadasClick(ActionEvent actionEvent) {
+        try {
+            Controller hozzaadasAblak = ujAblak("festmeny-hozzaadas-view.fxml", "Festmény hozzáadása", 300, 240);
+            hozzaadasAblak.getStage().setOnCloseRequest(event -> festmenyListaFeltoltes());
+            hozzaadasAblak.getStage().show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

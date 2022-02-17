@@ -26,4 +26,17 @@ public class Api {
 
         return jsonConverter.fromJson(json, type);
     }
+
+    public static Festmeny postFestmeny(Festmeny uj) throws IOException {
+        Gson jsonConverter = new Gson();
+        String ujJson = jsonConverter.toJson(uj);
+        Response response = RequestHandler.post(FESTMENY_URL, ujJson);
+        String json = response.getContent();
+        if (response.getResponseCode() > 400) {
+            String msg = jsonConverter.fromJson(json, ApiError.class).getMessage();
+            throw new IOException(msg);
+        }
+
+        return jsonConverter.fromJson(json, Festmeny.class);
+    }
 }
