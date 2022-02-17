@@ -1,9 +1,6 @@
 package hu.csepel.muzeumfrontendjavafx;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -14,6 +11,14 @@ public class RequestHandler {
 
     public static Response get(String url) throws IOException {
         HttpURLConnection conn = setConnection(url);
+
+        return getResponse(conn);
+    }
+
+    public static Response post(String url, String data) throws IOException {
+        HttpURLConnection conn = setConnection(url);
+        conn.setRequestMethod("POST");
+        setBody(conn, data);
 
         return getResponse(conn);
     }
@@ -38,6 +43,17 @@ public class RequestHandler {
         is.close();
 
         return new Response(responseCode, builder.toString());
+    }
+
+    private static void setBody(HttpURLConnection conn, String data) throws IOException {
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setDoOutput(true);
+        OutputStream os = conn.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os));
+        writer.write(data);
+        writer.flush();
+        writer.close();
+        os.close();
     }
 
     private static HttpURLConnection setConnection(String url) throws IOException {
