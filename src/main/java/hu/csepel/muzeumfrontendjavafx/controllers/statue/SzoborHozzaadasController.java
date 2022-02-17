@@ -84,7 +84,7 @@ public class SzoborHozzaadasController extends Controller {
                 alert("Sikertelen hozzáadás!");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            hibaKiir(e);
         }
     }
 }

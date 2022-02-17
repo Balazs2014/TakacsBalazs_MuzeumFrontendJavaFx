@@ -10,7 +10,8 @@ public class Api {
         String json = response.getContent();
         Gson jsonConverter = new Gson();
         if (response.getResponseCode() > 400) {
-            String msg = jsonConverter.fromJson(json, ApiError.class).getMessage();
+            ApiError hiba = jsonConverter.fromJson(json, ApiError.class);
+            String msg = hiba.getStatusCode() + " - " + hiba.getMessage();
             throw new IOException(msg);
         }
         return json;
@@ -21,7 +22,8 @@ public class Api {
         Response response = RequestHandler.post(url, ujJson);
         String json = response.getContent();
         if (response.getResponseCode() > 400) {
-            String msg = jsonConverter.fromJson(json, ApiError.class).getMessage();
+            ApiError hiba = jsonConverter.fromJson(json, ApiError.class);
+            String msg = hiba.getStatusCode() + " - " + hiba.getMessage();
             throw new IOException(msg);
         }
         return json;
@@ -32,7 +34,8 @@ public class Api {
         Gson jsonConverter = new Gson();
         String json = respone.getContent();
         if (respone.getResponseCode() > 400) {
-            String msg = jsonConverter.fromJson(json, ApiError.class).getMessage();
+            ApiError hiba = jsonConverter.fromJson(json, ApiError.class);
+            String msg = hiba.getStatusCode() + " - " + hiba.getMessage();
             throw new IOException(msg);
         }
         return respone;
@@ -42,7 +45,8 @@ public class Api {
         Response response = RequestHandler.put(url + "/" + id, modositJson);
         String json = response.getContent();
         if (response.getResponseCode() > 400) {
-            String msg = jsonConverter.fromJson(json, ApiError.class).getMessage();
+            ApiError hiba = jsonConverter.fromJson(json, ApiError.class);
+            String msg = hiba.getStatusCode() + " - " + hiba.getMessage();
             throw new IOException(msg);
         }
         return json;

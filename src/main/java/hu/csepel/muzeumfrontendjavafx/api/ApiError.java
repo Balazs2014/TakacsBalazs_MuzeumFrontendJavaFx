@@ -2,9 +2,11 @@ package hu.csepel.muzeumfrontendjavafx.api;
 
 public class ApiError {
     private String message;
+    private int statusCode;
 
-    public ApiError(String message) {
+    public ApiError(String message, int statusCode) {
         this.message = message;
+        this.statusCode = statusCode;
     }
 
     public String getMessage() {
@@ -13,5 +15,13 @@ public class ApiError {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
     }
 }

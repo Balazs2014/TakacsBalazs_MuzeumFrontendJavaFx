@@ -101,7 +101,7 @@ public class SzoborModositasController extends Controller {
                 alert("Sikertelen módosítás!");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            hibaKiir(e);
         }
     }
 }

@@ -74,7 +74,7 @@ public class MainController extends Controller {
                 tableViewFestmeny.getItems().add(festmeny);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            hibaKiir(e);
         }
     }
 
@@ -88,7 +88,7 @@ public class MainController extends Controller {
                 tableViewSzobor.getItems().add(szobor);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            hibaKiir(e);
         }
     }
 
@@ -99,7 +99,7 @@ public class MainController extends Controller {
             hozzaadasAblak.getStage().setOnCloseRequest(event -> festmenyListaFeltoltes());
             hozzaadasAblak.getStage().show();
         } catch (IOException e) {
-            e.printStackTrace();
+            hibaKiir(e);
         }
     }
 
@@ -114,7 +114,7 @@ public class MainController extends Controller {
             alert(siker ? "Sikeres törlés!" : "Sikertelen törlés!");
             festmenyListaFeltoltes();
         } catch (IOException e) {
-            e.printStackTrace();
+            hibaKiir(e);
         }
     }
 
@@ -127,7 +127,7 @@ public class MainController extends Controller {
             modositasAblak.getStage().setOnHiding(event -> festmenyListaFeltoltes());
             modositasAblak.getStage().show();
         } catch (IOException e) {
-            e.printStackTrace();
+            hibaKiir(e);
         }
     }
 
@@ -138,7 +138,7 @@ public class MainController extends Controller {
             hozzaadasAblak.getStage().setOnCloseRequest(event -> szoborListaFeltoltes());
             hozzaadasAblak.getStage().show();
         } catch (IOException e) {
-            e.printStackTrace();
+            hibaKiir(e);
         }
     }
 
@@ -151,7 +151,7 @@ public class MainController extends Controller {
             modositasAblak.getStage().setOnHiding(event -> szoborListaFeltoltes());
             modositasAblak.getStage().show();
         } catch (IOException e) {
-            e.printStackTrace();
+            hibaKiir(e);
         }
     }
 
@@ -166,7 +166,7 @@ public class MainController extends Controller {
             alert(siker ? "Sikeres törlés!" : "Sikertelen törlés!");
             szoborListaFeltoltes();
         } catch (IOException e) {
-            e.printStackTrace();
+            hibaKiir(e);
         }
     }
 
