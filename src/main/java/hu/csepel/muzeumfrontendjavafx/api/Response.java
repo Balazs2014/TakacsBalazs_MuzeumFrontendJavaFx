@@ -1,4 +1,4 @@
-package hu.csepel.muzeumfrontendjavafx;
+package hu.csepel.muzeumfrontendjavafx.api;
 
 public class Response {
     int responseCode;

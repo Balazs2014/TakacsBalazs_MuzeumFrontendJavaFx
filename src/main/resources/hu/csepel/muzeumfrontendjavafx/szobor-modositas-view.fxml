@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<GridPane hgap="10.0" prefHeight="240.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.csepel.muzeumfrontendjavafx.controllers.painting.FestmenyHozzaadasController">
+<GridPane hgap="10.0" prefHeight="240.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.csepel.muzeumfrontendjavafx.controllers.statue.SzoborModositasController">
    <columnConstraints>
       <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="122.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
@@ -16,22 +16,22 @@
       <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Label alignment="CENTER_RIGHT" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" text="Title">
+      <Label alignment="CENTER_RIGHT" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" text="Person">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label alignment="CENTER_RIGHT" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" text="On display" GridPane.rowIndex="1">
+      <Label alignment="CENTER_RIGHT" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" text="Height" GridPane.rowIndex="1">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label alignment="CENTER_RIGHT" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" text="Year" GridPane.rowIndex="2">
+      <Label alignment="CENTER_RIGHT" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" text="Price" GridPane.rowIndex="2">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button mnemonicParsing="false" onAction="#onHozzaadasClick" prefHeight="49.0" prefWidth="260.0" text="Hozzáadás" GridPane.columnSpan="2" GridPane.rowIndex="3">
+      <Button mnemonicParsing="false" onAction="#onModositasClick" prefHeight="49.0" prefWidth="260.0" text="Módosítás" GridPane.columnSpan="2" GridPane.rowIndex="3">
          <font>
             <Font name="Verdana Bold" size="20.0" />
          </font>
@@ -40,30 +40,32 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Spinner fx:id="inputEv" editable="true" prefHeight="25.0" prefWidth="172.0">
+                  <Spinner fx:id="inputAr" editable="true" prefHeight="25.0" prefWidth="188.0">
                       <valueFactory>
-                          <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="100" initialValue="1000" max="2022" min="1" />
+                          <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1000" initialValue="10000" max="500000" min="1000" />
                       </valueFactory>
                   </Spinner>
-                  <Label fx:id="lblEvHiba" textFill="RED" />
+                  <Label fx:id="lblArHiba" textFill="RED" />
                </children>
             </VBox>
          </children>
       </VBox>
       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
          <children>
-            <TextField fx:id="inputCim" />
-            <Label fx:id="lblCimHiba" textFill="RED" />
+            <TextField fx:id="inputSzemely" />
+            <Label fx:id="lblSzemelyHiba" textFill="RED" />
          </children>
       </VBox>
-      <CheckBox fx:id="inputKiallitva" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets />
-         </GridPane.margin>
-         <padding>
-            <Insets top="5.0" />
-         </padding>
-      </CheckBox>
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <Spinner fx:id="inputMagassag" editable="true" prefHeight="25.0" prefWidth="170.0">
+               <valueFactory>
+                  <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="10" initialValue="50" max="250" min="15" />
+               </valueFactory>
+            </Spinner>
+            <Label fx:id="lblMagassagHiba" textFill="RED" />
+         </children>
+      </VBox>
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

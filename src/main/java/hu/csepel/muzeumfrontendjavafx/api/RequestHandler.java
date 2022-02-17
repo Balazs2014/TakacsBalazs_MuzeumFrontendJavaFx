@@ -1,4 +1,4 @@
-package hu.csepel.muzeumfrontendjavafx;
+package hu.csepel.muzeumfrontendjavafx.api;
 
 import java.io.*;
 import java.net.HttpURLConnection;

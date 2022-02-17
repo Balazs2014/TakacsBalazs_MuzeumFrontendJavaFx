@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<GridPane hgap="10.0" prefHeight="240.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.csepel.muzeumfrontendjavafx.controllers.painting.FestmenyHozzaadasController">
+<GridPane hgap="10.0" prefHeight="240.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.csepel.muzeumfrontendjavafx.controllers.painting.FestmenyModositasController">
    <columnConstraints>
       <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="122.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
@@ -31,7 +31,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button mnemonicParsing="false" onAction="#onHozzaadasClick" prefHeight="49.0" prefWidth="260.0" text="Hozzáadás" GridPane.columnSpan="2" GridPane.rowIndex="3">
+      <Button mnemonicParsing="false" onAction="#onModositasClick" prefHeight="49.0" prefWidth="260.0" text="Módosítás" GridPane.columnSpan="2" GridPane.rowIndex="3">
          <font>
             <Font name="Verdana Bold" size="20.0" />
          </font>
@@ -40,7 +40,7 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Spinner fx:id="inputEv" editable="true" prefHeight="25.0" prefWidth="172.0">
+                  <Spinner fx:id="inputEv" editable="true" prefHeight="25.0" prefWidth="168.0">
                       <valueFactory>
                           <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="100" initialValue="1000" max="2022" min="1" />
                       </valueFactory>

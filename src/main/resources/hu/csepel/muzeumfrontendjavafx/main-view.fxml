@@ -27,7 +27,7 @@
                                     <Button fx:id="btnFestmenyTorles" disable="true" minWidth="100.0" mnemonicParsing="false" onAction="#onFestmenyTorlesClick" text="Törlés" />
                                  </children>
                               </HBox>
-                              <TableView fx:id="tableViewFestmeny" onMouseClicked="#onItemSelected" prefHeight="428.0" prefWidth="450.0" GridPane.rowIndex="1">
+                              <TableView fx:id="tableViewFestmeny" onMouseClicked="#onFestmenySelected" prefHeight="428.0" prefWidth="450.0" GridPane.rowIndex="1">
                                 <columns>
                                   <TableColumn fx:id="festmenyIdCol" prefWidth="75.0" text="ID" />
                                   <TableColumn fx:id="festmenyCimCol" prefWidth="75.0" text="CÍM" />
@@ -62,11 +62,11 @@
                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                        <children>
                                            <Button minWidth="100.0" mnemonicParsing="false" onAction="#onSzoborHozzaadasClick" text="Hozzáadás" />
-                                           <Button minWidth="100.0" mnemonicParsing="false" onAction="#onSzoborModositasClick" text="Módosítás" />
-                                           <Button minWidth="100.0" mnemonicParsing="false" onAction="#onSzoborTorlesClick" text="Törlés" />
+                                           <Button fx:id="btnSzoborModositas" minWidth="100.0" mnemonicParsing="false" onAction="#onSzoborModositasClick" text="Módosítás" />
+                                           <Button fx:id="btnSzoborTorles" minWidth="100.0" mnemonicParsing="false" onAction="#onSzoborTorlesClick" text="Törlés" />
                                        </children>
                                    </HBox>
-                                   <TableView fx:id="tableViewSzobor" prefHeight="428.0" prefWidth="450.0" GridPane.rowIndex="1">
+                                   <TableView fx:id="tableViewSzobor" onMouseClicked="#onSzoborSelected" prefHeight="428.0" prefWidth="450.0" GridPane.rowIndex="1">
                                        <columns>
                                            <TableColumn fx:id="szoborIdCol" prefWidth="75.0" text="ID" />
                                            <TableColumn fx:id="szoborSzemelyCol" prefWidth="75.0" text="SZEMÉLY" />

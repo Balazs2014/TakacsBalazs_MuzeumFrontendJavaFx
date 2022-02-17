@@ -1,7 +1,7 @@
-package hu.csepel.muzeumfrontendjavafx.controllers;
+package hu.csepel.muzeumfrontendjavafx.controllers.painting;
 
-import hu.csepel.muzeumfrontendjavafx.Api;
 import hu.csepel.muzeumfrontendjavafx.Controller;
+import hu.csepel.muzeumfrontendjavafx.api.FestmenyApi;
 import hu.csepel.muzeumfrontendjavafx.classes.Festmeny;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,9 +28,10 @@ public class FestmenyHozzaadasController extends Controller {
     public void onHozzaadasClick(ActionEvent actionEvent) {
         String cim = inputCim.getText();
         if (cim.isEmpty()) {
-            lblCimHiba.setVisible(true);
+            lblCimHiba.setText("A cím megadása kötelező!");
             return;
         }
+        lblCimHiba.setText("");
 
         boolean kiallitva = inputKiallitva.isSelected();
 
@@ -39,23 +40,21 @@ public class FestmenyHozzaadasController extends Controller {
             ev = inputEv.getValue();
         } catch (NullPointerException e) {
             lblEvHiba.setText("Az év megaádsa kötelező!");
-            lblEvHiba.setVisible(true);
             return;
         } catch (Exception e) {
             lblEvHiba.setText("Az év 1 és 2022 közötti lehet!");
-            lblEvHiba.setVisible(true);
             return;
         }
 
         if (ev < 1 || ev > 2022) {
             lblEvHiba.setText("Az év 1 és 2022 közötti lehet!");
-            lblEvHiba.setVisible(true);
             return;
         }
+        lblEvHiba.setText("");
 
         try {
             Festmeny uj = new Festmeny(0, cim, kiallitva, ev);
-            Festmeny letrehozott = Api.postFestmeny(uj);
+            Festmeny letrehozott = FestmenyApi.post(uj);
             if (letrehozott != null) {
                 alert("Sikeres hozzáadás!");
                 inputCim.setText("");
