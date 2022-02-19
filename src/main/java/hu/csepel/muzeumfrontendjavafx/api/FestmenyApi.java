@@ -27,7 +27,7 @@ public class FestmenyApi extends Controller {
     }
 
     public static boolean delete(int id) throws IOException {
-        return Api.delete(API_URL, id).getResponseCode() == 240;
+        return Api.delete(API_URL, id).getResponseCode() == 204;
     }
 
     public static Festmeny put(Festmeny modosit, int id) throws IOException {
